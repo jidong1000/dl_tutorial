@@ -1,5 +1,7 @@
 import numpy as np
 
+# 激活函数
+
 '''
 隐藏层：
 1.首选ReLU, 如果效果不好可以常识ReLU的变体
@@ -32,6 +34,20 @@ def softmax(x):
 
 def identity(x):
     return x
+
+# 损失函数
+def mean_squared_error(y, t):
+    return (np.sum(y - t) ** 2) * 0.5
+
+def cross_entropy(y, t):
+    if y.ndim == 1:
+        t = t.reshape(1, t.size)
+        y = y.reshape(1, y.size)
+    if t.size == y.size:
+        t = t.argmax(axis=1)
+    n = y.shape[0]
+
+    return -np.sum(np.log(y[np.arange(n), t] + 1e-10)) / n
 
 if __name__ == "__main__":
     x = np.array([0, 2, 3, 4, -1, -2])
