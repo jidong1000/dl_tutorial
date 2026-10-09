@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.functions import *
-from common.gradient import *
+# from common.gradient import *
 from common.two_layer_net import *
 from common.load_data import *
 
@@ -30,9 +30,8 @@ for i in range(epochs):
         t_batch = t_train[batch_mask]
 
         # 计算梯度
-        print(f"Epoch {i + 1}, batch {_ + 1}/{iters_per_epoch}: 开始计算梯度")
-        grad = model.numerical_gradient(x_batch, t_batch)
-        print("梯度计算完成")
+        # grad = model.numerical_gradient(x_batch, t_batch)
+        grad = model.gradient(x_batch, t_batch)
 
         # 更新参数
         for key in model.params.keys():
